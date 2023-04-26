@@ -394,6 +394,7 @@ Temporary Items
 
 =======
 # Local
+/src/migrations/*
 .env
 dist
 .webpack

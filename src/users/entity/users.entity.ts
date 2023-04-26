@@ -1,20 +1,23 @@
-import {Entity, Column, OneToMany} from 'typeorm'
-import { CommonBaseEntity } from './common-base.entity'
-import { PostsEntity } from './posts.entity'
-import {TimestampsType} from "../../shared/types/timestamps.type";
+import { Entity, Column, OneToMany } from 'typeorm';
+import { TimestampsType } from '../../shared/types/timestamps.type';
+import { PostsEntity } from '../../posts/entity/posts.entity';
+import { CommonBaseEntity } from '../../shared/entities/common-base.entity';
 
-@Entity('PostsUsers')
-export class PostsUsersEntity extends CommonBaseEntity {
-    @OneToMany(() => PostsEntity, (post) => post.postUser)
-    posts: PostsEntity[]
+@Entity('Users')
+export class UsersEntity extends CommonBaseEntity {
+  @OneToMany(() => PostsEntity, (post) => post.user)
+  posts: PostsEntity[];
 
-    @Column({ unique: true })
-    externalUserId: string
+  @Column({ unique: true })
+  username: string;
 
-    get common(): TimestampsType {
-        return {
-            createdAt: this.createdAt,
-            updatedAt: this.updatedAt,
-        }
-    }
+  @Column()
+  password: string;
+
+  get common(): TimestampsType {
+    return {
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    };
+  }
 }

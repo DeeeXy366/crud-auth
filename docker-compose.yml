@@ -4,35 +4,23 @@ volumes:
   postgres-storage:
 
 networks:
-  checker-network:
-    name: events-network
+  crud-network:
+    name: testovoye-network
 
 services:
   postgres:
     image: postgres:11
-    container_name: events-postgres
+    container_name: testovoye-postgres
     environment: 
-      - POSTGRES_USER=events
-      - POSTGRES_PASSWORD=events
+      - POSTGRES_USER=testovoye
+      - POSTGRES_PASSWORD=testovoye
       - PGDATA=/data/postgres
     volumes:
        - postgres-storage:/data/postgres
     networks:
-      checker-network:
+      crud-network:
     ports:
       - "5435:5432"
-    hostname: events-postgres
-    restart: always
-  adminer:
-    image: michalhosna/adminer
-    container_name: events-adminer
-    environment:
-      - ADMINER_SERVER=events-postgres:5432
-      - ADMINER_DRIVER=pgsql
-    networks:
-      checker-network:
-    ports:
-      - "8092:8080"
-    hostname: events
+    hostname: testovoye-postgres
     restart: always
 

@@ -1,15 +1,10 @@
-import { Module } from '@nestjs/common'
-import { TypeOrmModule } from '@nestjs/typeorm'
+import { Module } from '@nestjs/common';
 
-import { CronService } from './cron.service'
-import { PostsEntity } from './entity/posts.entity'
-import { UsersEntity } from './entity/users.entity'
-import { EventsController } from './events.controller'
-import { EventsService } from './events.service'
+import { PostsController } from './posts.controller';
+import { UsersModule } from '../users/users.module';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([UsersEntity, PostsEntity])],
-    controllers: [EventsController],
-    providers: [EventsService, CronService],
+  imports: [UsersModule],
+  controllers: [PostsController],
 })
-export class EventsModule {}
+export class PostsModule {}

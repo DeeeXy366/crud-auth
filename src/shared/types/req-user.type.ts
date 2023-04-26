@@ -1,4 +1,3 @@
-export class TimestampsType {
-  createdAt: Date;
-  updatedAt: Date;
+export class ReqUserType {
+  userId: string;
 }

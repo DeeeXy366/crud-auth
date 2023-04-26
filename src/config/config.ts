@@ -1,5 +1,5 @@
-import { ConfigModuleOptions } from '@nestjs/config'
+import { ConfigModuleOptions } from '@nestjs/config';
 
 export const config: ConfigModuleOptions = {
-    isGlobal: true,
-}
+  isGlobal: true,
+};
