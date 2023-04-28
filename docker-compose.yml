@@ -1,10 +1,7 @@
 version: "3.7"
 
-volumes:
-  postgres-storage:
-
 networks:
-  crud-network:
+  testovoye-network:
     name: testovoye-network
 
 services:
@@ -12,15 +9,29 @@ services:
     image: postgres:11
     container_name: testovoye-postgres
     environment: 
-      - POSTGRES_USER=testovoye
-      - POSTGRES_PASSWORD=testovoye
-      - PGDATA=/data/postgres
+      - POSTGRES_USER=${PSQL_USERNAME}
+      - POSTGRES_PASSWORD=${PSQL_PASSWORD}
+      - POSTGRES_DB=${PSQL_DATABASE}
     volumes:
        - postgres-storage:/data/postgres
     networks:
-      crud-network:
+      - testovoye-network
     ports:
-      - "5435:5432"
-    hostname: testovoye-postgres
+      - 5435:${PSQL_PORT}
     restart: always
+    hostname: ${PSQL_HOST}
+  testovoye-app:
+    container_name: testovoye-app
+    networks:
+      - testovoye-network
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - postgres
 
+volumes:
+  postgres-storage:

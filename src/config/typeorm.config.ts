@@ -28,7 +28,7 @@ export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
       password: configService.get('PSQL_PASSWORD'),
       synchronize: false,
       migrations: [`${__dirname}/../migrations/*{.ts,.js}`],
-      migrationsRun: true,
+      migrationsRun: false,
     };
   },
   inject: [ConfigService],
